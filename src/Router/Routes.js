@@ -6,6 +6,7 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Product from "../Pages/Products/Product";
 import SignUp from "../Pages/SignUp/SignUp";
+import WrongRoute from "../Pages/Shared/ErrorDisplay/WrongRoute";
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,9 @@ const router = createBrowserRouter([
             {
                 path: '/blogs',
                 element: <Blogs></Blogs>
+            },
+            {
+                path: "*", element: <WrongRoute></WrongRoute>
             },
         ]
     }
