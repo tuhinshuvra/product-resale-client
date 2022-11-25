@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Categories from '../../Categories/Categories';
+import Carousol from '../Carousol/Carousol';
 
 const Home = () => {
     const categories = useLoaderData();
@@ -15,6 +16,7 @@ const Home = () => {
                         ></Categories>)
                 }
             </div>
+            <Carousol></Carousol>
         </div>
     );
 };
