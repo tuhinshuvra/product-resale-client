@@ -48,10 +48,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <Link to="/" className="btn btn-ghost normal-case text-2xl font-bold">
-                        <img className=' w-16' src={Logo} alt="" />
-                        Easy Market
-
-                    </Link>
+                        <img className=' w-16' src={Logo} alt="" />Easy Market</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">

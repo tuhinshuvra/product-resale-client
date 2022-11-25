@@ -89,7 +89,7 @@ const Login = () => {
 
 
                     <input className=' mt-3 btn btn-accent form-control w-full' type="submit" value='Login' />
-                    <p className=' my-3 text-center'> <b> New to Doctors Portal?</b> <Link to='/signup'> <span className=''>Create new account</span></Link> </p>
+                    <p className=' my-3 text-center'> <b> New to Easy Market?</b> <Link to='/signup'> <span className=' text-blue-900 font-bold'>Create new account</span></Link> </p>
                     <div className="divider">OR</div>
                     <button onClick={handleGoogleLogin} className=' btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
 

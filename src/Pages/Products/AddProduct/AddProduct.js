@@ -25,7 +25,10 @@ const AddProduct = () => {
         }
     })
 
-    const handleAddDoctor = (data) => {
+    const sellerName = user?.displayName;
+    const sellerEmail = user?.email;
+
+    const handleAddProduct = (data) => {
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
@@ -40,12 +43,18 @@ const AddProduct = () => {
                     const product = {
                         category: data.category,
                         title: data.name,
+                        sellerName: sellerName,
+                        sellerEmail: sellerEmail,
                         image: imgData.data.url,
+                        location: data.location,
+                        price: data.price,
+                        originalPrice: data.originalPrice,
+                        postedDate: data.postedDate,
+                        yearOfUse: data.yearOfUse,
                         description: data.description,
                     }
                     console.log("Product :", product);
 
-                    // Save Categories information
                     // save product information
                     fetch('http://localhost:5000/products', {
                         method: 'POST',
@@ -62,7 +71,6 @@ const AddProduct = () => {
                             // form.reset()
                             console.log(result);
                         })
-
                 }
             })
     }
@@ -75,7 +83,7 @@ const AddProduct = () => {
         <div className=' flex justify-center items-center '>
             <div className=' w-96 p-4'>
                 <h2 className=' text-xl font-bold  text-center'>Add a New Product</h2>
-                <form onSubmit={handleSubmit(handleAddDoctor)}>
+                <form onSubmit={handleSubmit(handleAddProduct)}>
                     {/* {signUpError && <p className=' text-red-600'>{signUpError}</p>} */}
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text">Category</span> </label>
@@ -83,7 +91,7 @@ const AddProduct = () => {
                             {...register("category")}
                             className="input input-bordered w-full">
                             {categories.map((category) =>
-                                <option key={category._id} value={category.title}>
+                                <option key={category._id} value={category._id}>
                                     {category.title}
                                 </option>)}
                         </select>
@@ -184,20 +192,6 @@ const AddProduct = () => {
                         />
                         {errors.description && <p className='text-red-600'>Description is required</p>}
 
-                        {/* Seller Name */}
-                        {
-                            user?.email ? <>{user?.displayName}</> : <>{user?.email}</>
-                        }
-                        <div className="form-control w-full">
-                            <label className="label"><span className="label-text">Seller Name</span> </label>
-                            <input type="text"
-                                name='seller'
-                                {...register("seller")}
-                                // placeholder="Seller Name"
-                                className="input input-bordered w-full"
-                            />
-                            {errors.seller && <p className='text-red-600'>Seller Name is required</p>}
-                        </div>
                     </div>
 
                     <input className=' mt-3 btn btn-accent form-control w-full' type="submit" value='Add' />

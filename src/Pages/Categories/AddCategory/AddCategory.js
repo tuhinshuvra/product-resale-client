@@ -22,7 +22,7 @@ const AddCategory = () => {
     //     }
     // })
 
-    const handleAddDoctor = (data) => {
+    const handleAddCategory = (data) => {
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
@@ -70,7 +70,7 @@ const AddCategory = () => {
         <div className=' flex justify-center items-center '>
             <div className=' w-96 p-4'>
                 <h2 className=' text-xl font-bold  text-center'>Add a New Category</h2>
-                <form onSubmit={handleSubmit(handleAddDoctor)}>
+                <form onSubmit={handleSubmit(handleAddCategory)}>
                     {/* {signUpError && <p className=' text-red-600'>{signUpError}</p>} */}
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text">Category Name</span> </label>
