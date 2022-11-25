@@ -20,7 +20,9 @@ const Navbar = () => {
 
         <li><Link className='font-bold' to="/addCategory">Add Category</Link></li>
         <li><Link className='font-bold' to="/addProduct">Add Product</Link></li>
-        <li><Link className='font-bold' to="/allProducts">All Products</Link></li>
+        {/* <li><Link className='font-bold' to="/allProducts">All Products</Link></li> */}
+        <li><Link className='font-bold' to="/productList">Product List</Link></li>
+        <li><Link className='font-bold' to="/categoryList">Category List</Link></li>
         <li><Link className='font-bold' to="/users">All User</Link></li>
         <li><Link className='font-bold' to="/blogs">Blogs</Link></li>
         {

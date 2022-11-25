@@ -11,6 +11,8 @@ import AllProduct from "../Pages/Products/AllProduct";
 import AddCategory from "../Pages/Categories/AddCategory/AddCategory";
 import AddProduct from "../Pages/Products/AddProduct/AddProduct";
 import AllUsers from "../Pages/Dashboard/AllUsers";
+import ProductList from "../Pages/Products/ProductList";
+import CategoryList from "../Pages/Categories/CategoryList";
 
 
 const router = createBrowserRouter([
@@ -24,12 +26,16 @@ const router = createBrowserRouter([
                 loader: () => fetch('http://localhost:5000/categories'),
             },
             {
+                path: '/addCategory',
+                element: <AddCategory></AddCategory>
+            },
+            {
                 path: '/categories',
                 element: <Categories></Categories>
             },
             {
-                path: '/addCategory',
-                element: <AddCategory></AddCategory>
+                path: '/categoryList',
+                element: <CategoryList></CategoryList>
             },
             {
                 path: '/addProduct',
@@ -38,6 +44,10 @@ const router = createBrowserRouter([
             {
                 path: '/allProducts',
                 element: <AllProduct></AllProduct>,
+            },
+            {
+                path: '/productList',
+                element: <ProductList></ProductList>
             },
             {
                 path: '/products/:Id',
