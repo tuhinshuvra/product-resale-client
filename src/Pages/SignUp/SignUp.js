@@ -29,7 +29,7 @@ const Signup = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        // saveUser(data.name, data.email);
+                        saveUser(data.name, data.email);
                     })
                     .catch(error => {
                         console.log(error)
@@ -39,20 +39,21 @@ const Signup = () => {
             .catch(error => console.log(error))
     }
 
-    // const saveUser = (name, email) => {
-    //     const user = { name, email };
-    //     fetch('http://localhost:5000/users', {
-    //         method: 'POST',
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setCreatedUserEmail(email);
-    //         })
-    // }
+    const saveUser = (name, email) => {
+        const user = { name, email };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                setCreatedUserEmail(email);
+                navigate('/')
+            })
+    }
 
     return (
         <div className=' flex justify-center items-center '>

@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvide';
 import Loading from '../../Loading/Loading';
 
 const AddProduct = () => {
+    const { user } = useContext(AuthContext);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
@@ -35,14 +38,15 @@ const AddProduct = () => {
             .then(imgData => {
                 if (imgData.success) {
                     const product = {
+                        category: data.category,
                         title: data.name,
                         image: imgData.data.url,
                         description: data.description,
-                        category: data.category,
                     }
                     console.log("Product :", product);
 
                     // Save Categories information
+                    // save product information
                     fetch('http://localhost:5000/products', {
                         method: 'POST',
                         headers: {
@@ -86,17 +90,19 @@ const AddProduct = () => {
                         {errors.category && <p className='text-red-500'>{errors.category.message}</p>}
                     </div>
 
+                    {/* product name */}
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text">Procucts Name</span> </label>
                         <input type="text"
                             name='name'
                             {...register("name", { required: true })}
-                            placeholder="Category Name"
+                            placeholder="Product Name"
                             className="input input-bordered w-full"
                         />
                         {errors.name && <p className='text-red-600'>Product Name is required</p>}
                     </div>
 
+                    {/* Product Image */}
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text">Photo</span> </label>
                         <input type="file"
@@ -108,6 +114,67 @@ const AddProduct = () => {
                         {errors.photo && <p className='text-red-600'>Upload Product Photo</p>}
                     </div>
 
+                    {/* Seller location */}
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Seller Location</span> </label>
+                        <input type="text"
+                            name='location'
+                            {...register("location", { required: true })}
+                            placeholder="Location"
+                            className="input input-bordered w-full"
+                        />
+                        {errors.location && <p className='text-red-600'>Product Location is required</p>}
+                    </div>
+
+                    {/* Sell Price */}
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Laptop Sale Price</span> </label>
+                        <input type="text"
+                            name='price'
+                            {...register("price", { required: true })}
+                            placeholder="Price"
+                            className="input input-bordered w-full"
+                        />
+                        {errors.price && <p className='text-red-600'>Product Price is required</p>}
+                    </div>
+
+                    {/* Original Price */}
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Laptop Original Price</span> </label>
+                        <input type="text"
+                            name='originalPrice'
+                            {...register("originalPrice", { required: true })}
+                            placeholder="Original Price"
+                            className="input input-bordered w-full"
+                        />
+                        {errors.originalPrice && <p className='text-red-600'>Product Original Price is required</p>}
+                    </div>
+
+                    {/* Year of use */}
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Year of Use</span> </label>
+                        <input type="text"
+                            name='yearOfUse'
+                            {...register("yearOfUse", { required: true })}
+                            placeholder="Year of Use"
+                            className="input input-bordered w-full"
+                        />
+                        {errors.yearOfUse && <p className='text-red-600'>Product Year of Use is required</p>}
+                    </div>
+
+                    {/* Posted Date */}
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Posted Date</span> </label>
+                        <input type="date"
+                            name='postedDate'
+                            {...register("postedDate", { required: true })}
+                            placeholder="Posted Date"
+                            className="input input-bordered w-full"
+                        />
+                        {errors.postedDate && <p className='text-red-600'>Posted Date is required</p>}
+                    </div>
+
+
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text">Description</span> </label>
                         <textarea type="description"
@@ -116,10 +183,24 @@ const AddProduct = () => {
                             className="input input-bordered w-full"
                         />
                         {errors.description && <p className='text-red-600'>Description is required</p>}
+
+                        {/* Seller Name */}
+                        {
+                            user?.email ? <>{user?.displayName}</> : <>{user?.email}</>
+                        }
+                        <div className="form-control w-full">
+                            <label className="label"><span className="label-text">Seller Name</span> </label>
+                            <input type="text"
+                                name='seller'
+                                {...register("seller")}
+                                // placeholder="Seller Name"
+                                className="input input-bordered w-full"
+                            />
+                            {errors.seller && <p className='text-red-600'>Seller Name is required</p>}
+                        </div>
                     </div>
 
                     <input className=' mt-3 btn btn-accent form-control w-full' type="submit" value='Add' />
-
                 </form>
             </div>
         </div>
