@@ -10,6 +10,7 @@ import WrongRoute from "../Pages/Shared/ErrorDisplay/WrongRoute";
 import AllProduct from "../Pages/Products/AllProduct";
 import AddCategory from "../Pages/Categories/AddCategory/AddCategory";
 import AddProduct from "../Pages/Products/AddProduct/AddProduct";
+import AllUsers from "../Pages/Dashboard/AllUsers";
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:5000/products?category=${params.Id}`),
             },
 
+            {
+                path: '/users',
+                element: <AllUsers></AllUsers>
+            },
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
