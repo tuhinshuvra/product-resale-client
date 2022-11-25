@@ -2,6 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Categories from '../../Categories/Categories';
 import Carousol from '../Carousol/Carousol';
+import Hero from '../Hero/Hero';
 
 const Home = () => {
     const categories = useLoaderData();
@@ -16,6 +17,7 @@ const Home = () => {
                         ></Categories>)
                 }
             </div>
+            <Hero></Hero>
             <Carousol></Carousol>
         </div>
     );
