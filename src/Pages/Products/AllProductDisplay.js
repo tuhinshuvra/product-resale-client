@@ -1,13 +1,13 @@
 import React from 'react';
 
 const AllProductDisplay = ({ product }) => {
-    const { title, price, mobile, location, img, description } = product;
+    const { title, price, mobile, location, image, description } = product;
 
     return (
         <div>
             {/* <h2>This is Product Page</h2> */}
             <div className="card card-compact w-96 bg-base-100 shadow-xl">
-                <figure><img src={img} alt="Shoes" /></figure>
+                <figure><img src={image} alt="Product" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{title}</h2>
                     <p>{description}</p>
