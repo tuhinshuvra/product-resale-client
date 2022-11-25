@@ -17,20 +17,21 @@ const Navbar = () => {
     }
 
     const menuItems = <React.Fragment>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/appointment">Appointment</Link></li>
-        <li><Link to="/reviews">Reviews</Link></li>
-        <li><Link to="/blogs">Blogs</Link></li>
+
+        <li><Link className='font-bold' to="/addCategory">Add Category</Link></li>
+        <li><Link className='font-bold' to="/addProduct">Add Product</Link></li>
+        <li><Link className='font-bold' to="/allProducts">All Products</Link></li>
+        <li><Link className='font-bold' to="/blogs">Blogs</Link></li>
         {
             user?.uid ?
                 <>
-                    <li><Link to="/dashboard">Dashboard</Link></li>
-                    <li><Link onClick={handleLogout} to="/">Logout</Link></li>
+                    <li><Link className='font-bold' to="/dashboard">Dashboard</Link></li>
+                    <li><Link className='font-bold' onClick={handleLogout} to="/">Logout</Link></li>
                 </>
                 :
-                <li><Link to="/login">Login</Link></li>
+                <li><Link className='font-bold' to="/login">Login</Link></li>
         }
+
     </React.Fragment>
 
     return (

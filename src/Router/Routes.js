@@ -8,6 +8,8 @@ import Product from "../Pages/Products/Product";
 import SignUp from "../Pages/SignUp/SignUp";
 import WrongRoute from "../Pages/Shared/ErrorDisplay/WrongRoute";
 import AllProduct from "../Pages/Products/AllProduct";
+import AddCategory from "../Pages/Categories/AddCategory/AddCategory";
+import AddProduct from "../Pages/Products/AddProduct/AddProduct";
 
 
 const router = createBrowserRouter([
@@ -19,16 +21,22 @@ const router = createBrowserRouter([
                 path: '/',
                 element: <Home></Home>,
                 loader: () => fetch('http://localhost:5000/categories'),
-
             },
             {
                 path: '/categories',
                 element: <Categories></Categories>
             },
             {
-                path: '/allPproducts',
+                path: '/addCategory',
+                element: <AddCategory></AddCategory>
+            },
+            {
+                path: '/addProduct',
+                element: <AddProduct></AddProduct>
+            },
+            {
+                path: '/allProducts',
                 element: <AllProduct></AllProduct>,
-                // loader: () => fetch('http://localhost:5000/allProducts'),
             },
             {
                 path: '/products/:Id',
