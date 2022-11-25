@@ -7,6 +7,7 @@ import laptop4 from '../../../assets/laptops/laptop-4.jpg';
 import laptop5 from '../../../assets/laptops/laptop-5.jpg';
 import laptop6 from '../../../assets/laptops/laptop-6.jpg';
 import CarousolItem from './CarousolItem';
+import './Carousol.css'
 
 const carousolData = [
     {
@@ -50,7 +51,7 @@ const carousolData = [
 const Carousol = () => {
     return (
 
-        <div className=' carousel w-full'>
+        <div className='carousol-bg carousel w-full mt-24'>
             {
                 carousolData.map(slide =>
                     <CarousolItem
