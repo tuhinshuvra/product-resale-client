@@ -20,8 +20,8 @@ const Home = () => {
                 }
             </div>
             <AllProduct></AllProduct>
-            <Hero></Hero>
             <Carousol></Carousol>
+            <Hero></Hero>
         </div>
     );
 };

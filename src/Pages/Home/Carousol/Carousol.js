@@ -50,19 +50,18 @@ const carousolData = [
 
 const Carousol = () => {
     return (
-
-        <div className='carousol-bg carousel w-full mt-24'>
-            {
-                carousolData.map(slide =>
-                    <CarousolItem
-                        key={slide.id}
-                        slide={slide}
-                    ></CarousolItem>
-                )
-            }
-
-
-
+        <div>
+            <h2 className=' text-center text-4xl font-bold mt-24'>Our Feature Products</h2>
+            <div className='carousol-bg carousel w-full mt-8'>
+                {
+                    carousolData.map(slide =>
+                        <CarousolItem
+                            key={slide.id}
+                            slide={slide}
+                        ></CarousolItem>
+                    )
+                }
+            </div>
         </div>
     );
 };
