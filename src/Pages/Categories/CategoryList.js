@@ -42,7 +42,6 @@ const CategoryList = () => {
             <h2 className=' text-center font-bold text-3xl mb-4'>Easy Market Product Category List</h2>
             <div className="overflow-x-auto">
                 <table className="table w-2/3 mx-auto">
-
                     <thead>
                         <tr className=' font-bold'>
                             <th>SL</th>

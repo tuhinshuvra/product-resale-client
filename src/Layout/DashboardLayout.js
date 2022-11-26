@@ -2,12 +2,14 @@ import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvide';
 import useAdmin from '../hooks/useAdmin';
+import useSeller from '../hooks/useSeller';
 import NavBar from '../Pages/Shared/NavBar/NavBar';
 
 
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email);
+    const [isSeller] = useSeller(user?.email);
     return (
         <div>
             <NavBar></NavBar>
@@ -20,15 +22,22 @@ const DashboardLayout = () => {
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80  text-base-content">
 
-                        <li className='mb-2 font-bold'><Link to="/dashboard">My Products</Link></li>
+                        {
+                            isSeller &&
+                            <>
+                                <li><Link className='mb-2 font-bold' to="/dashboard/sellerProduct">My Products</Link></li>
+                                <li><Link className='my-1 font-bold' to="/dashboard/addProduct">Add Product</Link></li>
+                            </>
+                        }
                         {
                             isAdmin &&
                             <>
-                                <li className='mb-2 font-bold'><Link to="/dashboard/allusers">All Users</Link></li>
-                                <li><Link className='font-bold' to="/dashboard/addCategory">Add Category</Link></li>
-                                <li><Link className='font-bold' to="/dashboard/categoryList">Category List</Link></li>
-                                <li className='mb-2 font-bold'><Link to="/dashboard/addProduct">Add Product</Link></li>
-                                <li><Link className='font-bold' to="/dashboard/allProducts">All Products</Link></li>
+                                <li><Link className='my-1 font-bold' to="/dashboard/allProducts">All Products</Link></li>
+                                <li><Link className='my-1 font-bold' to="/dashboard/addCategory">Add Category</Link></li>
+                                <li><Link className='my-1 font-bold' to="/dashboard/addProduct">Add Product</Link></li>
+                                <li><Link className='my-1 font-bold' to="/dashboard/allusers">Manage Users</Link></li>
+                                <li><Link className='my-1 font-bold' to="/dashboard/categoryList">Manage Categories</Link></li>
+                                <li><Link className='my-1 font-bold' to="/dashboard/productList">Manage Products</Link></li>
                                 {/* <li className='mb-2 font-bold'><Link to="/dashboard/manageproducts">Manage products</Link></li> */}
                             </>
                         }

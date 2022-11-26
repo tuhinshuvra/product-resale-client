@@ -19,6 +19,7 @@ import MyProduct from "../Pages/Products/MyProduct";
 import PrivateRoute from "./PrivateRoutes";
 import DashboardLayout from "../Layout/DashboardLayout";
 import AdminRoute from "./AdminRoutes";
+import SellerRoute from "./SellerRoutes";
 
 
 const router = createBrowserRouter([
@@ -31,23 +32,15 @@ const router = createBrowserRouter([
                 element: <Home></Home>,
                 loader: () => fetch('http://localhost:5000/categories'),
             },
-
             {
                 path: '/categories',
                 element: <Categories></Categories>
             },
-
-
-
             {
                 path: '/productList',
                 element: <ProductList></ProductList>
             },
-            {
-                path: '/productOnMail',
-                element: <MyProduct></MyProduct>,
-                // loader: ({ params }) => fetch(`http://localhost:5000/productOnMail?email=${params.email}`)
-            },
+
             {
                 path: '/products/:Id',
                 element: <Product></Product>,
@@ -58,10 +51,6 @@ const router = createBrowserRouter([
                 element: <ProductUpdate></ProductUpdate>,
                 loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`),
             },
-            // {
-            //     path: '/users',
-            //     element: <AllUsers></AllUsers>
-            // },
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
@@ -85,8 +74,8 @@ const router = createBrowserRouter([
         // errorElement: <DisplayError></DisplayError>,
         children: ([
             {
-                path: '/dashboard',
-                element: <MyProduct></MyProduct>
+                path: '/dashboard/sellerProduct',
+                element: <SellerRoute> <MyProduct></MyProduct></SellerRoute>,
             },
             {
                 path: '/dashboard/allusers',
@@ -106,7 +95,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/updateCategory/:id',
-                element: <CategoryUpdate></CategoryUpdate>,
+                element: <AdminRoute> <CategoryUpdate></CategoryUpdate></AdminRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`),
             },
             {
@@ -114,12 +103,20 @@ const router = createBrowserRouter([
                 element: <AddProduct></AddProduct>
             },
             {
+                path: '/dashboard/productOnMail',
+                element: <MyProduct></MyProduct>,
+            },
+            {
                 path: '/dashboard/allProducts',
-                element: <AllProduct></AllProduct>,
+                element: <AdminRoute> <AllProduct></AllProduct></AdminRoute>,
+            },
+            {
+                path: '/dashboard/productList',
+                element: <ProductList></ProductList>
             },
             {
                 path: '/dashboard/manageusers',
-                element: <AdminRoute><AllUsers></AllUsers>   </AdminRoute>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             // {
             //     path: '/dashboard/payment/:id',
