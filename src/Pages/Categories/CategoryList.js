@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import ConfirmationModal from '../Shared/ConfirmationModal/ConfirmationModal';
 
 const CategoryList = () => {
@@ -54,37 +55,32 @@ const CategoryList = () => {
     }
 
     return (
-        <div>
-            <h2 className=' text-center font-bold text-lg'>Easy Market Product All Category</h2>
+        <div className=' my-16'>
+            <h2 className=' text-center font-bold text-3xl mb-4'>Easy Market Product All Category</h2>
             <div className="overflow-x-auto">
-                <table className="table w-full">
+                <table className="table w-2/3 mx-auto">
 
                     <thead>
                         <tr className=' font-bold'>
                             <th>SL</th>
                             <th>Image</th>
                             <th>Title</th>
+                            <th>Description</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             categories.map((category, index) =>
-
-
                                 <tr className="hover" key={category._id}>
                                     <th>{index + 1}</th>
                                     <td className=' w-24'><img src={category.image} alt="" /></td>
                                     <td>{category.title}</td>
-                                    {/* <td> */}
-                                    {/* {
-                                            user?.role === 'admin' ? <b className=' text-green-800'> Admin</b> :
-                                                <button onClick={() => handleMakeAdmin(user._id)} className=" btn btn-sm btn-info">
-                                                    <span> Make Admin</span>
-                                                </button>
-                                        } */}
-                                    {/* </td> */}
-                                    <td> <label onClick={() => setDeletingCategory(category)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label></td>
+                                    <td>{category.description}</td>
+                                    <td>
+                                        <Link to={`/updateCategory/${category._id}`}><button className=' btn btn-info btn-sm'> Update</button></Link>
+                                        <label onClick={() => setDeletingCategory(category)} htmlFor="confirmation-modal" className="btn btn-sm btn-error ml-1">Delete</label>
+                                    </td>
                                 </tr>
                             )
                         }

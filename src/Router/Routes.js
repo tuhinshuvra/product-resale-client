@@ -13,6 +13,7 @@ import AddProduct from "../Pages/Products/AddProduct/AddProduct";
 import AllUsers from "../Pages/Dashboard/AllUsers";
 import ProductList from "../Pages/Products/ProductList";
 import CategoryList from "../Pages/Categories/CategoryList";
+import CategoryUpdate from "../Pages/Categories/CategoryUpdate";
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
             {
                 path: '/categoryList',
                 element: <CategoryList></CategoryList>
+            },
+            {
+                path: '/updateCategory/:id',
+                element: <CategoryUpdate></CategoryUpdate>,
+                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`),
             },
             {
                 path: '/addProduct',

@@ -50,6 +50,7 @@ const AddProduct = () => {
                         location: data.location,
                         price: data.price,
                         originalPrice: data.originalPrice,
+                        condition: data.condition,
                         postedDate: data.postedDate,
                         yearOfUse: data.yearOfUse,
                         description: data.description,
