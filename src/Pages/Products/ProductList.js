@@ -11,7 +11,7 @@ const ProductList = () => {
         setDeletingProduct(null);
     }
 
-    const { data: categories = [], refetch } = useQuery({
+    const { data: products = [], refetch } = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
             const response = await fetch('http://localhost:5000/products');
@@ -48,21 +48,21 @@ const ProductList = () => {
                             <th>SL</th>
                             <th>Image</th>
                             <th>Title</th>
-                            <th>Description</th>
+                            <th>Posted Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            categories.map((category, index) =>
-                                <tr className="hover" key={category._id}>
+                            products.map((product, index) =>
+                                <tr className="hover" key={product._id}>
                                     <th>{index + 1}</th>
-                                    <td className=' w-24'><img src={category.image} alt="" /></td>
-                                    <td>{category.title}</td>
-                                    <td>{category.description}</td>
+                                    <td className=' w-24'><img src={product.image} alt="" /></td>
+                                    <td>{product.title}</td>
+                                    <td>{product.postedDate}</td>
                                     <td>
-                                        <Link to={`/updateCategory/${category._id}`}><button className=' btn btn-info btn-sm'> Update</button></Link>
-                                        <label onClick={() => setDeletingProduct(category)} htmlFor="confirmation-modal" className="btn btn-sm btn-error ml-1">Delete</label>
+                                        <Link to={`/updateProduct/${product._id}`}><button className=' btn btn-info btn-sm'> Update</button></Link>
+                                        <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className="btn btn-sm btn-error ml-1">Delete</label>
                                     </td>
                                 </tr>
                             )

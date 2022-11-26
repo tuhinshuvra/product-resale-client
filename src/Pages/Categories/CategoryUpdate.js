@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import { Navigate, useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const CategoryUpdate = () => {
     const storedCategory = useLoaderData();
@@ -41,12 +41,12 @@ const CategoryUpdate = () => {
             <form onSubmit={handleUpdateCategory} className="lg:w-1/2 mx-auto" >
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Category Name</span> </label>
-                    <input onChange={handleInputUpdate} type="text" name='title' defaultValue={storedCategory.title} className="input input-bordered w-full" /><br />
+                    <input onChange={handleInputUpdate} type="text" name='title' defaultValue={storedCategory.title} className="input input-bordered w-full" required /><br />
                 </div>
 
                 <div className="form-control w-full">
                     <label className="label"><span className="label-text">Description</span> </label>
-                    <input onChange={handleInputUpdate} type="text" name='description' defaultValue={storedCategory.description} className="input input-bordered w-full" /><br />
+                    <input onChange={handleInputUpdate} type="text" name='description' defaultValue={storedCategory.description} className="input input-bordered w-full" required /><br />
                 </div>
 
                 <input className=' mt-3 btn btn-accent form-control w-full' type="submit" value='Update' />
