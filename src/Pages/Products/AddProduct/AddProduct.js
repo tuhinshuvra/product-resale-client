@@ -44,7 +44,7 @@ const AddProduct = () => {
                         category: data.category,
                         title: data.name,
                         sellerName: sellerName,
-                        sellerEmail: sellerEmail,
+                        email: sellerEmail,
                         phone: data.phone,
                         image: imgData.data.url,
                         location: data.location,

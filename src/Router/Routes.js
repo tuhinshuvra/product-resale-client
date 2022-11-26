@@ -15,6 +15,7 @@ import ProductList from "../Pages/Products/ProductList";
 import CategoryList from "../Pages/Categories/CategoryList";
 import CategoryUpdate from "../Pages/Categories/CategoryUpdate";
 import ProductUpdate from "../Pages/Products/ProductUpdate";
+import MyProduct from "../Pages/Products/MyProduct";
 
 
 const router = createBrowserRouter([
@@ -55,6 +56,11 @@ const router = createBrowserRouter([
             {
                 path: '/productList',
                 element: <ProductList></ProductList>
+            },
+            {
+                path: '/productOnMail',
+                element: <MyProduct></MyProduct>,
+                // loader: ({ params }) => fetch(`http://localhost:5000/productOnMail?email=${params.email}`)
             },
             {
                 path: '/products/:Id',

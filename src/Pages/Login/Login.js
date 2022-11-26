@@ -30,6 +30,7 @@ const Login = () => {
                 toast.success('User Login Successfully.')
                 console.log(user);
                 setLoginUserEmail(data.email);
+                navigate('/');
 
             })
             .catch(error => {
@@ -47,6 +48,8 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate('/');
+
             })
             .then(error => console.log(error))
     }
