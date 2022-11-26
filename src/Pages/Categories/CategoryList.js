@@ -20,28 +20,11 @@ const CategoryList = () => {
         }
     })
 
-    // const handleMakeAdmin = (id) => {
-    //     fetch(`http://localhost:5000/users/admin/${id}`, {
-    //         method: 'PUT',
-    //         headers: {
-
-    //             // authorization: `brarer ${localStorage.getItem('accessToken')}`
-    //         }
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             if (data.modifiedCount > 0) {
-    //                 toast.success('User Make Admin Successfully.')
-    //                 refetch()
-    //             }
-    //         })
-    // }
-
     const handleDeleteCategory = (category) => {
         fetch(`http://localhost:5000/categories/${category._id}`, {
             method: 'DELETE',
             headers: {
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
+                // authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
         })
             .then(response => response.json())
@@ -56,7 +39,7 @@ const CategoryList = () => {
 
     return (
         <div className=' my-16'>
-            <h2 className=' text-center font-bold text-3xl mb-4'>Easy Market Product All Category</h2>
+            <h2 className=' text-center font-bold text-3xl mb-4'>Easy Market Product Category List</h2>
             <div className="overflow-x-auto">
                 <table className="table w-2/3 mx-auto">
 
