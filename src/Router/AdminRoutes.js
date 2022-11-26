@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthProvide';
+import useAdmin from '../hooks/useAdmin';
 
-const AdminRoutes = () => {
-    return (
-        <div>
-            <h2>This is Admin Route</h2>
-        </div>
-    );
+const AdminRoute = ({ children, loading }) => {
+    const { user } = useContext(AuthContext);
+    const [isAdmin, isAdminLoading] = useAdmin(user?.email);
+    const location = useLocation();
+
+    if (loading || isAdminLoading) {
+        return <>
+            <progress className=' progress w-56' ></progress>
+            <h3 className=' text-center font-bold my-auto'>Loading .................</h3>
+        </>
+    }
+
+    if (user && isAdmin) {
+        return children;
+    }
+
+    return <Navigate to="/login" state={{ from: location }} replace></Navigate>
 };
 
-export default AdminRoutes;
+export default AdminRoute;

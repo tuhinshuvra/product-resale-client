@@ -16,6 +16,9 @@ import CategoryList from "../Pages/Categories/CategoryList";
 import CategoryUpdate from "../Pages/Categories/CategoryUpdate";
 import ProductUpdate from "../Pages/Products/ProductUpdate";
 import MyProduct from "../Pages/Products/MyProduct";
+import PrivateRoute from "./PrivateRoutes";
+import DashboardLayout from "../Layout/DashboardLayout";
+import AdminRoute from "./AdminRoutes";
 
 
 const router = createBrowserRouter([
@@ -28,31 +31,14 @@ const router = createBrowserRouter([
                 element: <Home></Home>,
                 loader: () => fetch('http://localhost:5000/categories'),
             },
-            {
-                path: '/addCategory',
-                element: <AddCategory></AddCategory>
-            },
+
             {
                 path: '/categories',
                 element: <Categories></Categories>
             },
-            {
-                path: '/categoryList',
-                element: <CategoryList></CategoryList>
-            },
-            {
-                path: '/updateCategory/:id',
-                element: <CategoryUpdate></CategoryUpdate>,
-                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`),
-            },
-            {
-                path: '/addProduct',
-                element: <AddProduct></AddProduct>
-            },
-            {
-                path: '/allProducts',
-                element: <AllProduct></AllProduct>,
-            },
+
+
+
             {
                 path: '/productList',
                 element: <ProductList></ProductList>
@@ -72,10 +58,10 @@ const router = createBrowserRouter([
                 element: <ProductUpdate></ProductUpdate>,
                 loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`),
             },
-            {
-                path: '/users',
-                element: <AllUsers></AllUsers>
-            },
+            // {
+            //     path: '/users',
+            //     element: <AllUsers></AllUsers>
+            // },
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
@@ -92,7 +78,56 @@ const router = createBrowserRouter([
                 path: "*", element: <WrongRoute></WrongRoute>
             },
         ]
-    }
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute> <DashboardLayout></DashboardLayout>  </PrivateRoute>,
+        // errorElement: <DisplayError></DisplayError>,
+        children: ([
+            {
+                path: '/dashboard',
+                element: <MyProduct></MyProduct>
+            },
+            {
+                path: '/dashboard/allusers',
+                element: <AdminRoute> <AllUsers></AllUsers></AdminRoute>
+            },
+            // {
+            //     path: '/dashboard/addproduct',
+            //     element: <AdminRoute> <Addproduct></Addproduct> </AdminRoute>
+            // },
+            {
+                path: '/dashboard/addCategory',
+                element: <AddCategory></AddCategory>
+            },
+            {
+                path: '/dashboard/categoryList',
+                element: <CategoryList></CategoryList>
+            },
+            {
+                path: '/dashboard/updateCategory/:id',
+                element: <CategoryUpdate></CategoryUpdate>,
+                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`),
+            },
+            {
+                path: '/dashboard/addProduct',
+                element: <AddProduct></AddProduct>
+            },
+            {
+                path: '/dashboard/allProducts',
+                element: <AllProduct></AllProduct>,
+            },
+            {
+                path: '/dashboard/manageusers',
+                element: <AdminRoute><AllUsers></AllUsers>   </AdminRoute>
+            },
+            // {
+            //     path: '/dashboard/payment/:id',
+            //     element: <AdminRoute><Payment></Payment></AdminRoute>,
+            //     loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`),
+            // },
+        ])
+    },
 ])
 
 export default router

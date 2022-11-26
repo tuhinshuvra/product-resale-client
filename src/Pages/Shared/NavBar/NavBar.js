@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvide';
 import Logo from '../../../assets/logo/logo.png';
 
-const Navbar = () => {
+const NavBar = () => {
     const { user, logout } = useContext(AuthContext);
 
 
@@ -18,13 +18,13 @@ const Navbar = () => {
 
     const menuItems = <React.Fragment>
 
-        <li><Link className='font-bold' to="/addCategory">Add Category</Link></li>
-        <li><Link className='font-bold' to="/addProduct">Add Product</Link></li>
+        {/* <li><Link className='font-bold' to="/addCategory">Add Category</Link></li> */}
+        {/* <li><Link className='font-bold' to="/addProduct">Add Product</Link></li> */}
         {/* <li><Link className='font-bold' to="/allProducts">All Products</Link></li> */}
-        <li><Link className='font-bold' to="/productList">Product List</Link></li>
-        <li><Link className='font-bold' to="/categoryList">Category List</Link></li>
-        <li><Link className='font-bold' to="/users">All User</Link></li>
-        <li><Link className='font-bold' to="/productOnMail">My Product</Link></li>
+        {/* <li><Link className='font-bold' to="/productList">Product List</Link></li> */}
+        {/* <li><Link className='font-bold' to="/categoryList">Category List</Link></li> */}
+        {/* <li><Link className='font-bold' to="/users">All User</Link></li> */}
+        {/* <li><Link className='font-bold' to="/productOnMail">My Product</Link></li> */}
         <li><Link className='font-bold' to="/blogs">Blogs</Link></li>
         {
             user?.uid ?
@@ -67,4 +67,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default NavBar;
