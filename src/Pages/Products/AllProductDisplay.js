@@ -1,7 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AllProductDisplay = ({ product }) => {
     const { title, price, mobile, location, image, description } = product;
+
+    const handleBookedProduct = (product) => {
+        console.log(product);
+    }
 
     return (
         <div>
@@ -12,7 +17,7 @@ const AllProductDisplay = ({ product }) => {
                     <h2 className="card-title">{title}</h2>
                     <p>{description}</p>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary btn-sm">Book Product</button>
+                        <Link to="/dashboard/myOrders"><button onClick={() => handleBookedProduct(product)} className="btn btn-primary btn-sm">Book Now</button></Link>
                     </div>
                 </div>
             </div>
