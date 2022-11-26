@@ -45,6 +45,7 @@ const AddProduct = () => {
                         title: data.name,
                         sellerName: sellerName,
                         sellerEmail: sellerEmail,
+                        phone: data.phone,
                         image: imgData.data.url,
                         location: data.location,
                         price: data.price,
@@ -52,6 +53,7 @@ const AddProduct = () => {
                         postedDate: data.postedDate,
                         yearOfUse: data.yearOfUse,
                         description: data.description,
+                        cause: data.cause,
                     }
                     console.log("Product :", product);
 
@@ -68,7 +70,6 @@ const AddProduct = () => {
                         .then(result => {
                             toast.success(`Product ${data.name} is added successfully`)
                             navigate('/')
-                            // form.reset()
                             console.log(result);
                         })
                 }
@@ -131,7 +132,19 @@ const AddProduct = () => {
                             placeholder="Location"
                             className="input input-bordered w-full"
                         />
-                        {errors.location && <p className='text-red-600'>Product Location is required</p>}
+                        {errors.location && <p className='text-red-600'>Seller Location is required</p>}
+                    </div>
+
+                    {/* Seller Phone */}
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Seller Phone</span> </label>
+                        <input type="text"
+                            name='phone'
+                            {...register("phone", { required: true })}
+                            placeholder="Phone Number"
+                            className="input input-bordered w-full"
+                        />
+                        {errors.phone && <p className='text-red-600'>Seller Phone Number is Required</p>}
                     </div>
 
                     {/* Sell Price */}
@@ -170,6 +183,19 @@ const AddProduct = () => {
                         {errors.yearOfUse && <p className='text-red-600'>Product Year of Use is required</p>}
                     </div>
 
+                    {/* Product Conditon */}
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Product Condition</span> </label>
+                        <select type="text"
+                            {...register("condition")}
+                            className="input input-bordered w-full">
+                            <option value="excellent">Excellent</option>
+                            <option selected value="good">Good</option>
+                            <option value="fair">Fair</option>
+                        </select>
+                        {/* {errors.condition && <p className='text-red-500'>{errors.condition.message}</p>} */}
+                    </div>
+
                     {/* Posted Date */}
                     <div className="form-control w-full">
                         <label className="label"><span className="label-text">Posted Date</span> </label>
@@ -182,16 +208,26 @@ const AddProduct = () => {
                         {errors.postedDate && <p className='text-red-600'>Posted Date is required</p>}
                     </div>
 
-
+                    {/* Product description */}
                     <div className="form-control w-full">
-                        <label className="label"><span className="label-text">Description</span> </label>
-                        <textarea type="description"
+                        <label className="label"><span className="label-text">Product Description</span> </label>
+                        <textarea type="text"
                             name='description'
                             {...register("description", { required: true })}
                             className="input input-bordered w-full"
                         />
-                        {errors.description && <p className='text-red-600'>Description is required</p>}
+                        {errors.description && <p className='text-red-600'>Description is Required</p>}
+                    </div>
 
+                    {/* Cause of sale */}
+                    <div className="form-control w-full">
+                        <label className="label"><span className="label-text">Cause of Sale</span> </label>
+                        <textarea type="text"
+                            name='cause'
+                            {...register("cause")}
+                            className="input input-bordered w-full"
+                        />
+                        {errors.cause && <p className='text-red-600'>Cause of Sale is Required</p>}
                     </div>
 
                     <input className=' mt-3 btn btn-accent form-control w-full' type="submit" value='Add' />

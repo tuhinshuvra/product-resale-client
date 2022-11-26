@@ -77,14 +77,8 @@ const Signup = () => {
                         <select type="text"
                             {...register("userType")}
                             className="input input-bordered w-full">
-
-                            {/* <option key={specialty._id} value={specialty.name}>
-                                {specialty.name}
-                            </option> */}
-
                             <option selected value="buyer">Buyer</option>
                             <option value="seller">Seller</option>
-
                         </select>
                         {/* {errors.userType && <p className='text-red-500'>{errors.userType.message}</p>} */}
                     </div>
