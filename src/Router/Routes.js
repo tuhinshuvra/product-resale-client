@@ -20,6 +20,8 @@ import PrivateRoute from "./PrivateRoutes";
 import DashboardLayout from "../Layout/DashboardLayout";
 import AdminRoute from "./AdminRoutes";
 import SellerRoute from "./SellerRoutes";
+import MyOrders from "../Pages/Dashboard/MyOrders";
+import MyBuyers from "../Pages/Dashboard/MyBuyers";
 
 
 const router = createBrowserRouter([
@@ -74,17 +76,25 @@ const router = createBrowserRouter([
         // errorElement: <DisplayError></DisplayError>,
         children: ([
             {
+                path: '/dashboard/myOrders',
+                element: <MyOrders></MyOrders>,
+            },
+            // {
+            //     path: '/dashboard/productOnMail',
+            //     element: <MyProduct></MyProduct>,
+            // },
+            {
                 path: '/dashboard/sellerProduct',
                 element: <SellerRoute> <MyProduct></MyProduct></SellerRoute>,
+            },
+            {
+                path: '/dashboard/myBuyers',
+                element: <SellerRoute> <MyBuyers></MyBuyers></SellerRoute>,
             },
             {
                 path: '/dashboard/allusers',
                 element: <AdminRoute> <AllUsers></AllUsers></AdminRoute>
             },
-            // {
-            //     path: '/dashboard/addproduct',
-            //     element: <AdminRoute> <Addproduct></Addproduct> </AdminRoute>
-            // },
             {
                 path: '/dashboard/addCategory',
                 element: <AddCategory></AddCategory>
@@ -100,11 +110,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/addProduct',
-                element: <AddProduct></AddProduct>
-            },
-            {
-                path: '/dashboard/productOnMail',
-                element: <MyProduct></MyProduct>,
+                element: <SellerRoute> <AddProduct></AddProduct></SellerRoute>,
             },
             {
                 path: '/dashboard/allProducts',
