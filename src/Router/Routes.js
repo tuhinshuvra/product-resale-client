@@ -20,10 +20,10 @@ import PrivateRoute from "./PrivateRoutes";
 import DashboardLayout from "../Layout/DashboardLayout";
 import AdminRoute from "./AdminRoutes";
 import SellerRoute from "./SellerRoutes";
-import MyOrders from "../Pages/Orders/MyOrders";
+import MyBookings from "../Pages/Bookings/MyBookings";
 import MyBuyers from "../Pages/Dashboard/MyBuyers";
 import ReportedItems from "../Pages/Dashboard/ReportedItems";
-import Orders from "../Pages/Orders/Orders";
+import Payment from "../Pages/Payment/Payment";
 
 
 const router = createBrowserRouter([
@@ -82,8 +82,9 @@ const router = createBrowserRouter([
             //     element: <MyOrders></MyOrders>,
             // },
             {
-                path: '/dashboard/orders',
-                element: <Orders></Orders>
+                path: '/dashboard/myBookings',
+                element: <MyBookings></MyBookings>,
+                loader: () => fetch('http://localhost:5000/bookingsOnMail'),
             },
             // {
             //     path: '/dashboard/productOnMail',
@@ -139,6 +140,11 @@ const router = createBrowserRouter([
             //     element: <AdminRoute><Payment></Payment></AdminRoute>,
             //     loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`),
             // },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment></Payment>,
+                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`),
+            },
         ])
     },
 ])

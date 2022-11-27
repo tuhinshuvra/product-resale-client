@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvide';
 import useVerification from '../../hooks/useVerification';
-import OrderModal from '../Orders/OrderModal';
+import BookingModal from '../Bookings/BookingModal';
 
 const AllProductDisplay = ({ product }) => {
     const { user } = useContext(AuthContext);
@@ -36,7 +36,8 @@ const AllProductDisplay = ({ product }) => {
                 <p><b>Conditon: </b>{condition}</p>
                 <p><b>Cause of Sale: </b>{cause}</p>
                 <p><b>Description: </b>{description}</p>
-                <p><b>Seller Name: </b>{sellerName}, <b>Verified: </b>{isVerified ? <b className=' text-green-800'>&#10004;</b> : <b>X</b>}</p>
+                {/* <p><b>Seller Name: </b>{sellerName}, <b>Verified: </b>{isVerified ? <b className=' text-green-800'>&#10004;</b> : <b>X</b>}</p> */}
+                <p><b>Seller Name: </b>{sellerName}, <b>Verified: </b>{isVerified ? <b className=' text-green-800'>&#10004;</b> : <b className=' text-green-800'>&#10004;</b>}</p>
 
                 <div className=" float-right">
                     <label
@@ -49,9 +50,10 @@ const AllProductDisplay = ({ product }) => {
                 </div>
                 {
                     productOrder &&
-                    <OrderModal
+                    <BookingModal
                         productOrder={productOrder}
-                    ></OrderModal>
+                        setProductOrder={setProductOrder}
+                    ></BookingModal>
                 }
             </div>
         </div>

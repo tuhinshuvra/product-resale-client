@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvide';
 
-const OrderModal = ({ productOrder }) => {
+const BookingModal = ({ productOrder, setProductOrder }) => {
     const { user } = useContext(AuthContext);
     console.log("Product Order :", productOrder);
     const { title, price, } = productOrder;
@@ -10,43 +10,49 @@ const OrderModal = ({ productOrder }) => {
 
     const handleBooking = (event) => {
         event.preventDefault();
-        // const form = event.target;
-        // const slot = form.slot.value;
-        // const name = form.name.value;
-        // const email = form.email.value;
-        // const phone = form.phone.value;
+        const form = event.target;
 
-        // const booking = {
-        //     // treatment: treatment.name,
-        //     patient: name,
-        //     price,
-        //     slot,
-        //     email,
-        //     phone,
-        // }
+        const product = form.product.value;
+        const price = form.price.value;
+        const email = form.email.value;
+        const phone = form.phone.value;
+        const date = form.date.value;
+        const time = form.time.value;
+        const location = form.location.value;
+        const buyer = form.buyer.value;
 
-        // TODO: send data to the server
+        const booking = {
+            product,
+            price,
+            email,
+            phone,
+            date,
+            time,
+            location,
+            buyer
+        }
+        console.log("booking :", booking);
 
-        // fetch('http://localhost:5000/orders', {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(booking)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         if (data.acknowledged) {
-        //             setOrder(null);
-        //             toast.success('Laptop Booking Confirmed.')
-        //             refetch();
-        //         } else {
-        //             toast.error(data.message)
-        //         }
-        //     })
-        // and  once data is saved close the modal 
-        // and display success toast
+
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success('Laptop Booking Confirmed.')
+                    // console.log("setProductOrder Type : ", typeof (setProductOrder));
+                    // console.log("productOrder Type : ", typeof (productOrder));
+                    setProductOrder(null);
+                } else {
+                    toast.error(data.message)
+                }
+            })
     }
     return (
         <>
@@ -63,8 +69,8 @@ const OrderModal = ({ productOrder }) => {
                                 slots.map((slot, index) => <option key={index} value={slot} >{slot}</option>)
                             }
                         </select> */}
-                        <input name='product' type="text" value={title} className="input input-bordered w-full" required disabled /> <br />
-                        <input name='price' type="text" value={price} className="input input-bordered w-full" required disabled /> <br />
+                        <input name='product' type="text" defaultValue={title} className="input input-bordered w-full" required disabled /> <br />
+                        <input name='price' type="text" defaultValue={price} className="input input-bordered w-full" required disabled /> <br />
                         <input name='buyer' type="text" defaultValue={user?.displayName} className="input input-bordered w-full" disabled />
                         <input name='email' type="email" defaultValue={user?.email} className="input input-bordered w-full" disabled />
                         <input name='phone' type="text" placeholder="Phone Number" className="input input-bordered w-full" required /> <br />
@@ -81,4 +87,4 @@ const OrderModal = ({ productOrder }) => {
     );
 };
 
-export default OrderModal;
+export default BookingModal;
