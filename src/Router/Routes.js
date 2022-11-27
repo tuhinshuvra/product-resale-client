@@ -20,8 +20,10 @@ import PrivateRoute from "./PrivateRoutes";
 import DashboardLayout from "../Layout/DashboardLayout";
 import AdminRoute from "./AdminRoutes";
 import SellerRoute from "./SellerRoutes";
-import MyOrders from "../Pages/Dashboard/MyOrders";
+import MyOrders from "../Pages/Orders/MyOrders";
 import MyBuyers from "../Pages/Dashboard/MyBuyers";
+import ReportedItems from "../Pages/Dashboard/ReportedItems";
+import Orders from "../Pages/Orders/Orders";
 
 
 const router = createBrowserRouter([
@@ -43,9 +45,10 @@ const router = createBrowserRouter([
                 element: <ProductList></ProductList>
             },
 
+
             {
                 path: '/products/:Id',
-                element: <Product></Product>,
+                element: <PrivateRoute><Product></Product></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/products?category=${params.Id}`),
             },
             {
@@ -75,9 +78,13 @@ const router = createBrowserRouter([
         element: <PrivateRoute> <DashboardLayout></DashboardLayout>  </PrivateRoute>,
         // errorElement: <DisplayError></DisplayError>,
         children: ([
+            // {
+            //     path: '/dashboard/myOrders',
+            //     element: <MyOrders></MyOrders>,
+            // },
             {
-                path: '/dashboard/myOrders',
-                element: <MyOrders></MyOrders>,
+                path: '/dashboard/orders',
+                element: <Orders></Orders>
             },
             // {
             //     path: '/dashboard/productOnMail',
@@ -119,6 +126,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/productList',
                 element: <ProductList></ProductList>
+            },
+            {
+                path: '/dashboard/reportedItem',
+                element: <AdminRoute> <ReportedItems></ReportedItems></AdminRoute>
             },
             {
                 path: '/dashboard/manageusers',
