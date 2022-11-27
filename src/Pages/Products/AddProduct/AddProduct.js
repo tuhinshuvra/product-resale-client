@@ -9,6 +9,9 @@ import Loading from '../../Loading/Loading';
 const AddProduct = () => {
     const { user } = useContext(AuthContext);
 
+
+    console.log("User Data:", user);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 

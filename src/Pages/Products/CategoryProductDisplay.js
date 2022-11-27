@@ -1,15 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvide';
 import useVerification from '../../hooks/useVerification';
 import OrderModal from '../Orders/OrderModal';
 
-const AllProductDisplay = ({ product }) => {
+const CategoryProductDisplay = ({ product }) => {
     const { user } = useContext(AuthContext);
     const [productOrder, setProductOrder] = useState(null);
     const [isVerified] = useVerification(user?.email);
     // console.log("Product :", product);
+
     const { _id, category, title, sellerName, email, phone, location, originalPrice, price, image, condition, postedDate, yearOfUse, cause, description } = product;
+
+    // const handleBookedProduct = (product) => {
+    //     setProductOrder(product);
+    // }
+
 
     return (
         <div>
@@ -37,7 +43,6 @@ const AllProductDisplay = ({ product }) => {
                 <p><b>Cause of Sale: </b>{cause}</p>
                 <p><b>Description: </b>{description}</p>
                 <p><b>Seller Name: </b>{sellerName}, <b>Verified: </b>{isVerified ? <b className=' text-green-800'>&#10004;</b> : <b>X</b>}</p>
-
                 <div className=" float-right">
                     <label
                         // disabled={slots.length === 0}
@@ -55,7 +60,9 @@ const AllProductDisplay = ({ product }) => {
                 }
             </div>
         </div>
+
+
     );
 };
 
-export default AllProductDisplay;
+export default CategoryProductDisplay;

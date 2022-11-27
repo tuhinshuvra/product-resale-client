@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import CategoryProductDisplay from './CategoryProductDisplay';
 import './Product.css';
-import ProductDisplay from './ProductDisplay';
 
 const Product = () => {
     const categoryProducts = useLoaderData();
@@ -11,10 +11,10 @@ const Product = () => {
             {/* <h2>This is Product Page</h2> */}
             {
                 categoryProducts.map(product =>
-                    <ProductDisplay
+                    <CategoryProductDisplay
                         key={product._id}
                         product={product}
-                    ></ProductDisplay>
+                    ></CategoryProductDisplay>
                 )
             }
 

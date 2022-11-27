@@ -23,7 +23,6 @@ const AllUsers = () => {
         fetch(`http://localhost:5000/users/admin/${id}`, {
             method: 'PUT',
             headers: {
-
                 // authorization: `brarer ${localStorage.getItem('accessToken')}`
             }
         })
@@ -35,7 +34,22 @@ const AllUsers = () => {
                 }
 
             })
+    }
 
+    const handleUserVerification = (id) => {
+        fetch(`http://localhost:5000/users/verification/${id}`, {
+            method: 'PUT',
+            headers: {
+                // authorization: `brarer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('User Verification Successfully.')
+                    refetch()
+                }
+            })
     }
 
     const handleDeleteUser = (user) => {
@@ -57,7 +71,7 @@ const AllUsers = () => {
 
     return (
         <div>
-            <h2 className=' text-center font-bold text-lg'>All Users</h2>
+            <h2 className=' text-center font-bold text-3xl lg:my-6'>Manage Users</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
 
@@ -67,6 +81,7 @@ const AllUsers = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>User Type</th>
+                            <th>Verification</th>
                             <th>User Status</th>
                             <th>Delete</th>
                         </tr>
@@ -81,6 +96,14 @@ const AllUsers = () => {
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td>{user.userType}</td>
+                                    <td>
+                                        {
+                                            user?.verification === 'verified' ? <b className=' text-green-800'> Verified</b> :
+                                                <button onClick={() => handleUserVerification(user._id)} className=" btn btn-sm btn-info">
+                                                    <span>Verify Seller</span>
+                                                </button>
+                                        }
+                                    </td>
                                     <td>
                                         {
                                             user?.role === 'admin' ? <b className=' text-green-800'> Admin</b> :
