@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvide';
 import Loading from '../../Loading/Loading';
 
@@ -234,7 +234,7 @@ const AddProduct = () => {
                         {errors.cause && <p className='text-red-600'>Cause of Sale is Required</p>}
                     </div>
 
-                    <input className=' mt-3 btn btn-accent form-control w-full' type="submit" value='Add' />
+                    <Link to='/dashboard/sellerProduct'><input className=' mt-3 btn btn-accent form-control w-full' type="submit" value='Add' /></Link>
                 </form>
             </div>
         </div>

@@ -24,6 +24,7 @@ import MyBookings from "../Pages/Bookings/MyBookings";
 import MyBuyers from "../Pages/Dashboard/MyBuyers";
 import ReportedItems from "../Pages/Dashboard/ReportedItems";
 import Payment from "../Pages/Payment/Payment";
+import ReportedProductList from "../Pages/Dashboard/ReportedProductList";
 
 
 const router = createBrowserRouter([
@@ -128,7 +129,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/reportedItem',
-                element: <AdminRoute> <ReportedItems></ReportedItems></AdminRoute>
+                element: <AdminRoute> <ReportedProductList></ReportedProductList></AdminRoute>
             },
             {
                 path: '/dashboard/manageusers',

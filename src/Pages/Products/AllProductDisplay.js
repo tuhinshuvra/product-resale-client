@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvide';
 import useVerification from '../../hooks/useVerification';
@@ -10,6 +11,21 @@ const AllProductDisplay = ({ product }) => {
     const [isVerified] = useVerification(user?.email);
     // console.log("Product :", product);
     const { _id, category, title, sellerName, email, phone, location, originalPrice, price, image, condition, postedDate, yearOfUse, cause, description } = product;
+
+    const productReportHandler = (id) => {
+        fetch(`http://localhost:5000/products/${id}`, {
+            method: 'PUT',
+            headers: {
+                // authorization: `brarer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Product Reported Successfully.')
+                }
+            })
+    }
 
     return (
         <div>
@@ -39,15 +55,21 @@ const AllProductDisplay = ({ product }) => {
                 {/* <p><b>Seller Name: </b>{sellerName}, <b>Verified: </b>{isVerified ? <b className=' text-green-800'>&#10004;</b> : <b>X</b>}</p> */}
                 <p><b>Seller Name: </b>{sellerName}, <b>Verified: </b>{isVerified ? <b className=' text-green-800'>&#10004;</b> : <b className=' text-green-800'>&#10004;</b>}</p>
 
-                <div className=" float-right">
-                    <label
-                        // disabled={slots.length === 0}
-                        htmlFor="booking-modal"
-                        className="btn bg-primary btn-sm text-white uppercase border-none"
-                        onClick={() => setProductOrder(product)}
-                    >
-                        {user?.email ? <>Book Now</> : <Link to="/login">Book Now</Link>}
-                    </label>
+                <div className='flex justify-between'>
+                    <div className=" float-right">
+                        <label
+                            // disabled={slots.length === 0}
+                            htmlFor="booking-modal"
+                            className="btn bg-primary btn-sm text-white uppercase border-none"
+                            onClick={() => setProductOrder(product)}
+                        > {user?.email ? <>Book Now</> : <Link to="/login">Book Now</Link>}
+                        </label>
+                    </div>
+                    <button
+                        onClick={() => productReportHandler(_id)}
+                        className=' btn btn-sm btn-info'>
+                        {user?.email ? <>Report</> : <Link to="/login">Report</Link>}
+                    </button>
                 </div>
                 {
                     productOrder &&
