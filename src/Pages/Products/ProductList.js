@@ -61,7 +61,7 @@ const ProductList = () => {
                                     <td>{product.title}</td>
                                     <td>{product.postedDate}</td>
                                     <td>
-                                        <Link to={`/updateProduct/${product._id}`}><button className=' btn btn-info btn-sm'> Update</button></Link>
+                                        {/* <Link to={`/updateProduct/${product._id}`}><button className=' btn btn-info btn-sm'> Update</button></Link> */}
                                         <label onClick={() => setDeletingProduct(product)} htmlFor="confirmation-modal" className="btn btn-sm btn-error ml-1">Delete</label>
                                     </td>
                                 </tr>

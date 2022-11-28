@@ -46,8 +46,6 @@ const BookingModal = ({ productOrder, setProductOrder }) => {
                 console.log(data);
                 if (data.acknowledged) {
                     toast.success('Laptop Booking Confirmed.')
-                    // console.log("setProductOrder Type : ", typeof (setProductOrder));
-                    // console.log("productOrder Type : ", typeof (productOrder));
                     setProductOrder(null);
                 } else {
                     toast.error(data.message)
@@ -57,7 +55,6 @@ const BookingModal = ({ productOrder, setProductOrder }) => {
     return (
         <>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
-            {/* {format(selectedDate, 'PP')} */}
             <div className="modal">
                 <div className="modal-box relative">
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>

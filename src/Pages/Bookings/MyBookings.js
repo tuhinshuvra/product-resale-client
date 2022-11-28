@@ -16,7 +16,7 @@ const MyBookings = () => {
     const { data: myBookings = [], refetch } = useQuery({
         queryKey: ['myBookings'],
         queryFn: async () => {
-            const response = await fetch(`http://localhost:5000/allBooking?email=${user?.email}`);
+            const response = await fetch(`http://localhost:5000/bookingsOnEail?email=${user?.email}`);
             const data = await response.json();
             return data;
         }
@@ -26,7 +26,7 @@ const MyBookings = () => {
         fetch(`http://localhost:5000/bookings/${myBookings._id}`, {
             method: 'DELETE',
             headers: {
-                // authorization: `bearer ${localStorage.getItem('accessToken')}`
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
         })
             .then(response => response.json())
@@ -77,15 +77,14 @@ const MyBookings = () => {
                                     <td>
                                         {
                                             // book.price && !book.paid &&
-                                            <Link
-                                                to={`/dashboard/payment/${book._id}`}>
+                                            <Link to={`/dashboard/payment/${book._id}`}>
                                                 <button className=' btn btn-primary btn-sm'
-                                                >Pay</button></Link>
+                                                >Pay</button>
+                                            </Link>
                                         }
                                         {
                                             book.price && book.paid &&
-                                            <span
-                                                className=' btn btn-success btn-sm'
+                                            <span className=' btn btn-success btn-sm'
                                             >Paid</span>
                                         }
                                         <label onClick={() => setDeleteBooking(book)} htmlFor="confirmation-modal" className="btn btn-sm btn-error ml-1">Delete</label>

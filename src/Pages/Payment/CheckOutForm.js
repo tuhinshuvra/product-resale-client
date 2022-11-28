@@ -7,100 +7,104 @@ const CheckOutForm = ({ booking }) => {
     const [success, setSuccess] = useState("");
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState("");
-    const { _id, patient, email, price } = booking;
+
+    const { _id, buyer, date, email, location, phone, price, product, time } = booking;
+
     const stripe = useStripe();
     const elements = useElements();
 
-    // useEffect(() => {
-    //     // Create PaymentIntent as soon as the page loads
-    //     fetch("http://localhost:5000/create-payment-intent", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             authorization: `brarer ${localStorage.getItem('accessToken')}`
-    //         },
-    //         body: JSON.stringify({ price }),
-    //     })
-    //         .then((res) => res.json())
-    //         .then((data) => setClientSecret(data.clientSecret));
-    // }, []);
+    useEffect(() => {
+        // Create PaymentIntent as soon as the page loads
+        fetch("http://localhost:5000/create-payment-intent", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `brarer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify({ price }),
+        })
+            .then((res) => res.json())
+            .then((data) => setClientSecret(data.clientSecret));
+    }, [price]);
 
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-    //     if (!elements || !elements) {
-    //         return;
-    //     }
-    //     // console.log('event');
-    //     const card = elements.getElement(CardElement);
-    //     if (card === null) {
-    //         return;
-    //     }
-    //     const { error, paymentMethod } = await stripe.createPaymentMethod({
-    //         type: 'card',
-    //         card
-    //     });
+        if (!stripe || !elements) {
+            return;
+        }
+        console.log('event');
+        const card = elements.getElement(CardElement);
+        if (card === null) {
+            return;
+        }
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card
+        });
 
-    //     if (error) {
-    //         console.log(error);
-    //         setCardError(error.message);
-    //     }
-    //     else {
-    //         setCardError('');
-    //     }
-    //     setSuccess('');
-    //     setProcessing(true);
+        if (error) {
+            console.log(error);
+            setCardError(error.message);
+        }
+        else {
+            setCardError('');
+        }
+        setSuccess('');
+        setProcessing(true);
 
-    //     const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
-    //         clientSecret,
-    //         {
-    //             payment_method: {
-    //                 card: card,
-    //                 billing_details: {
-    //                     name: patient,
-    //                     email: email,
-    //                 },
-    //             },
-    //         },
-    //     );
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: buyer,
+                        email: email,
+                    },
+                },
+            },
+        );
 
-    //     if (confirmError) {
-    //         setCardError(confirmError.message);
-    //         return;
-    //     }
-    //     if (paymentIntent.status === 'succeeded') {
-    //         console.log("Card Info : ", card);
-    //         const payment = {
-    //             price,
-    //             transactionId: paymentIntent.id,
-    //             email,
-    //             bookingId: _id
-    //         }
-    //         fetch('http://localhost:5000/payments', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'content-type': 'application/json',
-    //                 authorization: `brarer ${localStorage.getItem('accessToken')}`
-    //             },
-    //             body: JSON.stringify(payment)
-    //         })
-    //             .then(res => res.json())
-    //             .then(data => {
-    //                 console.log(data);
-    //                 if (data.insertedId) {
-    //                     setSuccess('Congrates! your payment completed.')
-    //                     setTransactionId(paymentIntent.id)
-    //                 }
-    //             })
-    //     }
-    //     setProcessing(false);
-    //     // console.log("paymentIntent : ", paymentIntent);
-    // }
+        if (confirmError) {
+            setCardError(confirmError.message);
+            return;
+        }
+        // console.log("paymentIntent:", paymentIntent);
+
+        if (paymentIntent.status === 'succeeded') {
+            console.log("Card Info : ", card);
+            const payment = {
+                price,
+                transactionId: paymentIntent.id,
+                email,
+                bookingId: _id
+            }
+            fetch('http://localhost:5000/payments', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `brarer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(payment)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.insertedId) {
+                        setSuccess('Congrates! your payment completed.')
+                        setTransactionId(paymentIntent.id)
+                    }
+                })
+        }
+        setProcessing(false);
+        console.log("paymentIntent : ", paymentIntent);
+    }
 
     return (
         <div>
             <h2>This is Payment System</h2>
-            {/* <p className=' text-center text-red-600 my-4'>{cardError}</p>
+            <p className=' text-center text-red-600 my-4'>{cardError}</p>
             <form onSubmit={handleSubmit}>
                 <CardElement
                     options={{
@@ -129,7 +133,7 @@ const CheckOutForm = ({ booking }) => {
                     <p className=' text-green-600'>{success}</p>
                     <p>Your transactionId : <span className=' font-bold'> {transactionId}</span></p>
                 </div>
-            } */}
+            }
         </div>
     );
 };

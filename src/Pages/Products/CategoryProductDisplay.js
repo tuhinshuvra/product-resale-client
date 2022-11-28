@@ -45,7 +45,7 @@ const CategoryProductDisplay = ({ product }) => {
                         htmlFor="booking-modal"
                         className="btn bg-primary btn-sm text-white uppercase border-none"
                         onClick={() => setProductOrder(product)}
-                    >Book Now
+                    > Book Now
                     </label>
                 </div>
                 {

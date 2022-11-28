@@ -45,7 +45,8 @@ const AllProductDisplay = ({ product }) => {
                         htmlFor="booking-modal"
                         className="btn bg-primary btn-sm text-white uppercase border-none"
                         onClick={() => setProductOrder(product)}
-                    >Book Now
+                    >
+                        {user?.email ? <>Book Now</> : <Link to="/login">Book Now</Link>}
                     </label>
                 </div>
                 {

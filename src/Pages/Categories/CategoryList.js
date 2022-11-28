@@ -60,7 +60,7 @@ const CategoryList = () => {
                                     <td>{category.title}</td>
                                     <td>{category.description}</td>
                                     <td>
-                                        <Link to={`/dashboard/updateCategory/${category._id}`}><button className=' btn btn-info btn-sm'> Update</button></Link>
+                                        {/* <Link to={`/dashboard/updateCategory/${category._id}`}><button className=' btn btn-info btn-sm'> Update</button></Link> */}
                                         <label onClick={() => setDeletingCategory(category)} htmlFor="confirmation-modal" className="btn btn-sm btn-error ml-1">Delete</label>
                                     </td>
                                 </tr>

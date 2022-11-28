@@ -13,18 +13,20 @@ console.log("stripePromise : ", stripePromise);
 
 const Payment = () => {
     const booking = useLoaderData();
+    console.log("booking : ", booking);
+
     const navigation = useNavigation();
 
     if (navigation.state === 'loading') {
         return <Loading></Loading>
     }
 
-    const { appointmentDate, treatment, patient, price, slot, email, phone } = booking;
+    const { _id, buyer, date, email, location, phone, price, product, time } = booking;
 
     return (
         <div className=' font-bold my-16'>
-            <h2>Payment for {treatment}</h2>
-            <h2>Please pay <b>${price}</b> for your appointment on {appointmentDate} at {slot}</h2>
+            <h2 className="text-2xl font-bold">Payment for {product}</h2>
+            <h2>Please pay <b>${price}</b> for the {product}</h2>
 
             <div className=" w-96 my-11">
                 <Elements stripe={stripePromise}>

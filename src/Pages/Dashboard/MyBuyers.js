@@ -3,7 +3,7 @@ import React from 'react';
 const MyBuyers = () => {
     return (
         <div>
-            <h2>This is my Buyers Section</h2>
+            <h2 className=' text-center text-3xl my-12'>My Buyers Section is Comming Soon..........</h2>
         </div>
     );
 };

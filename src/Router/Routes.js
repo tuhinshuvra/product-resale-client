@@ -52,7 +52,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/updateProduct/:id',
-                element: <ProductUpdate></ProductUpdate>,
+                element: <PrivateRoute> <ProductUpdate></ProductUpdate></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`),
             },
             {
@@ -75,7 +75,6 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoute> <DashboardLayout></DashboardLayout>  </PrivateRoute>,
-        // errorElement: <DisplayError></DisplayError>,
         children: ([
             // {
             //     path: '/dashboard/myOrders',
@@ -83,7 +82,7 @@ const router = createBrowserRouter([
             // },
             {
                 path: '/dashboard/myBookings',
-                element: <MyBookings></MyBookings>,
+                element: <PrivateRoute> <MyBookings></MyBookings></PrivateRoute>,
                 loader: () => fetch('http://localhost:5000/bookingsOnMail'),
             },
             // {
