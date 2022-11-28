@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Category.css'
 
-const Categories = ({ category }) => {
+const Categories = ({ category, setLoading }) => {
     const { _id, title, image, description } = category;
+
+    setLoading(false);
 
     return (
         <div>

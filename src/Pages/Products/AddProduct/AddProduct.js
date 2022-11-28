@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,6 +8,11 @@ import Loading from '../../Loading/Loading';
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext);
+    const [loading, setLoading] = useState(true);
+
+    if (loading) {
+        <Loading></Loading>
+    }
 
 
     console.log("User Data:", user);
@@ -22,7 +27,7 @@ const AddProduct = () => {
     const { data: categories, isLoading } = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categories');
+            const res = await fetch('https://resale-market-server.vercel.app/categories');
             const data = await res.json();
             return data;
         }
@@ -62,7 +67,7 @@ const AddProduct = () => {
                     console.log("Product :", product);
 
                     // save product information
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://resale-market-server.vercel.app/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -73,8 +78,9 @@ const AddProduct = () => {
                         .then(res => res.json())
                         .then(result => {
                             toast.success(`Product ${data.name} is added successfully`)
-                            navigate('/')
+                            navigate('/dashboard/sellerProduct')
                             console.log(result);
+                            setLoading(false);
                         })
                 }
             })
@@ -234,7 +240,7 @@ const AddProduct = () => {
                         {errors.cause && <p className='text-red-600'>Cause of Sale is Required</p>}
                     </div>
 
-                    <Link to='/dashboard/sellerProduct'><input className=' mt-3 btn btn-accent form-control w-full' type="submit" value='Add' /></Link>
+                    <input className=' mt-3 btn btn-accent form-control w-full' type="submit" value='Add' />
                 </form>
             </div>
         </div>

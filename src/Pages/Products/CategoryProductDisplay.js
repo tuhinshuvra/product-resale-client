@@ -4,17 +4,23 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvide';
 import useVerification from '../../hooks/useVerification';
 import BookingModal from '../Bookings/BookingModal';
+import ConfirmationModal from '../Shared/ConfirmationModal/ConfirmationModal';
 
 const CategoryProductDisplay = ({ product }) => {
     const { user } = useContext(AuthContext);
     const [productOrder, setProductOrder] = useState(null);
+    const [reportedProduct, setReportedProduct] = useState(null);
+
     const [isVerified] = useVerification(user?.email);
-    // console.log("Product :", product);
 
     const { _id, category, title, sellerName, email, phone, location, originalPrice, price, image, condition, postedDate, yearOfUse, cause, description } = product;
 
+
+    const closeModal = () => {
+        setReportedProduct(null);
+    }
     const productReportHandler = (id) => {
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`https://resale-market-server.vercel.app/products/${id}`, {
             method: 'PUT',
             headers: {
                 // authorization: `brarer ${localStorage.getItem('accessToken')}`
@@ -65,11 +71,14 @@ const CategoryProductDisplay = ({ product }) => {
                         > {user?.email ? <>Book Now</> : <Link to="/login">Book Now</Link>}
                         </label>
                     </div>
-                    <button
+                    {/* <button
                         onClick={() => productReportHandler(_id)}
                         className=' btn btn-sm btn-info'>
                         {user?.email ? <>Report</> : <Link to="/login">Report</Link>}
-                    </button>
+                    </button> */}
+                    <label onClick={() => setReportedProduct(_id)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">
+                        {user?.email ? <>Report</> : <Link to="/login">Report</Link>}
+                    </label>
                 </div>
                 {
                     productOrder &&
@@ -77,6 +86,18 @@ const CategoryProductDisplay = ({ product }) => {
                         productOrder={productOrder}
                         setProductOrder={setProductOrder}
                     ></BookingModal>
+                }
+
+                {
+                    reportedProduct &&
+                    <ConfirmationModal
+                        title={`Are you sure you want to report?`}
+                        message={`If you report  the product its can't undone`}
+                        successAction={productReportHandler}
+                        successButtonName="Report"
+                        modalData={reportedProduct}
+                        closeModal={closeModal}
+                    ></ConfirmationModal>
                 }
             </div>
         </div>

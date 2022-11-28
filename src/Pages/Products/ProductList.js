@@ -14,14 +14,14 @@ const ProductList = () => {
     const { data: products = [], refetch } = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
-            const response = await fetch('http://localhost:5000/products');
+            const response = await fetch('https://resale-market-server.vercel.app/products');
             const data = await response.json();
             return data;
         }
     })
 
     const handleDeleteCategory = (product) => {
-        fetch(`http://localhost:5000/products/${product._id}`, {
+        fetch(`https://resale-market-server.vercel.app/products/${product._id}`, {
             method: 'DELETE',
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`

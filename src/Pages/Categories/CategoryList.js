@@ -14,14 +14,14 @@ const CategoryList = () => {
     const { data: categories = [], refetch } = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
-            const response = await fetch('http://localhost:5000/categories');
+            const response = await fetch('https://resale-market-server.vercel.app/categories');
             const data = await response.json();
             return data;
         }
     })
 
     const handleDeleteCategory = (category) => {
-        fetch(`http://localhost:5000/categories/${category._id}`, {
+        fetch(`https://resale-market-server.vercel.app/categories/${category._id}`, {
             method: 'DELETE',
             headers: {
                 // authorization: `bearer ${localStorage.getItem('accessToken')}`

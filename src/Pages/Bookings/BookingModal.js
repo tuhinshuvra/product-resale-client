@@ -12,7 +12,8 @@ const BookingModal = ({ productOrder, setProductOrder }) => {
         event.preventDefault();
         const form = event.target;
 
-        const product = form.product.value;
+        const product = productOrder._id;
+        const title = form.title.value;
         const price = form.price.value;
         const email = form.email.value;
         const phone = form.phone.value;
@@ -23,18 +24,19 @@ const BookingModal = ({ productOrder, setProductOrder }) => {
 
         const booking = {
             product,
+            title,
             price,
             email,
             phone,
             date,
             time,
             location,
-            buyer
+            buyer,
         }
         console.log("booking :", booking);
 
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://resale-market-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -66,7 +68,7 @@ const BookingModal = ({ productOrder, setProductOrder }) => {
                                 slots.map((slot, index) => <option key={index} value={slot} >{slot}</option>)
                             }
                         </select> */}
-                        <input name='product' type="text" defaultValue={title} className="input input-bordered w-full" required disabled /> <br />
+                        <input name='title' type="text" defaultValue={title} className="input input-bordered w-full" required disabled /> <br />
                         <input name='price' type="text" defaultValue={price} className="input input-bordered w-full" required disabled /> <br />
                         <input name='buyer' type="text" defaultValue={user?.displayName} className="input input-bordered w-full" disabled />
                         <input name='email' type="email" defaultValue={user?.email} className="input input-bordered w-full" disabled />

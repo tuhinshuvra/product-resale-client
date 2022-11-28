@@ -16,14 +16,14 @@ const MyBookings = () => {
     const { data: myBookings = [], refetch } = useQuery({
         queryKey: ['myBookings'],
         queryFn: async () => {
-            const response = await fetch(`http://localhost:5000/bookingsOnEail?email=${user?.email}`);
+            const response = await fetch(`https://resale-market-server.vercel.app/bookingsOnEail?email=${user?.email}`);
             const data = await response.json();
             return data;
         }
     })
 
     const handleBookingDelete = (myBookings) => {
-        fetch(`http://localhost:5000/bookings/${myBookings._id}`, {
+        fetch(`https://resale-market-server.vercel.app/bookings/${myBookings._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

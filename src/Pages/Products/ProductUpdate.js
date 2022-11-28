@@ -10,7 +10,7 @@ const ProductUpdate = () => {
 
     const handleProductUpdate = (event) => {
         event.preventDefault();
-        fetch(`http://localhost:5000/products/${storedProduct._id}`, {
+        fetch(`https://resale-market-server.vercel.app/products/${storedProduct._id}`, {
             method: 'PUT',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(product)

@@ -13,7 +13,7 @@ const ReportedProductList = () => {
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const response = await fetch('http://localhost:5000/reportedProducts?status=reported');
+            const response = await fetch('https://resale-market-server.vercel.app/reportedProducts?status=reported');
             const data = await response.json();
             return data;
         }
@@ -21,7 +21,7 @@ const ReportedProductList = () => {
 
     const handleDeleteUser = (product) => {
         console.log(product);
-        fetch(`http://localhost:5000/products/${product._id}`, {
+        fetch(`https://resale-market-server.vercel.app/products/${product._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

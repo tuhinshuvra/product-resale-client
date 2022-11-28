@@ -10,7 +10,7 @@ const CategoryUpdate = () => {
 
     const handleUpdateCategory = (event) => {
         event.preventDefault();
-        fetch(`http://localhost:5000/categories/${storedCategory._id}`, {
+        fetch(`https://resale-market-server.vercel.app/categories/${storedCategory._id}`, {
             method: 'PUT',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(category)

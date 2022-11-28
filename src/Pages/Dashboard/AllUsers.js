@@ -13,14 +13,14 @@ const AllUsers = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const response = await fetch('http://localhost:5000/users');
+            const response = await fetch('https://resale-market-server.vercel.app/users');
             const data = await response.json();
             return data;
         }
     })
 
     const handleMakeAdmin = (id) => {
-        fetch(`http://localhost:5000/users/admin/${id}`, {
+        fetch(`https://resale-market-server.vercel.app/users/admin/${id}`, {
             method: 'PUT',
             headers: {
                 // authorization: `brarer ${localStorage.getItem('accessToken')}`
@@ -37,7 +37,7 @@ const AllUsers = () => {
     }
 
     const handleUserVerification = (id) => {
-        fetch(`http://localhost:5000/users/verification/${id}`, {
+        fetch(`https://resale-market-server.vercel.app/users/verification/${id}`, {
             method: 'PUT',
             headers: {
                 // authorization: `brarer ${localStorage.getItem('accessToken')}`
@@ -53,7 +53,7 @@ const AllUsers = () => {
     }
 
     const handleDeleteUser = (user) => {
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://resale-market-server.vercel.app/users/${user._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

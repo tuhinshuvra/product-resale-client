@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import Loading from '../Loading/Loading';
 import AllProductDisplay from './AllProductDisplay';
 
 const AllProduct = () => {
     const [allProduct, setAllProduct] = useState([]);
+    const [loading, setLoding] = useState(true);
+
+    if (loading) {
+        <Loading></Loading>
+    }
 
     useEffect(() => {
-        fetch('http://localhost:5000/allProducts')
+        fetch('https://resale-market-server.vercel.app/allProducts')
             .then(response => response.json())
-            .then(data => setAllProduct(data))
+            .then(data => {
+                setAllProduct(data)
+                setLoding(false);
+            })
     }, [])
     return (
         <div className=' mt-24'>

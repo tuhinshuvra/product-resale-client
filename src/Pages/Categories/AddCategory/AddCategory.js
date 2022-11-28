@@ -16,7 +16,7 @@ const AddCategory = () => {
     // const { data: categories, isLoading } = useQuery({
     //     queryKey: ['categories'],
     //     queryFn: async () => {
-    //         const response = await fetch('http://localhost:5000/categories');
+    //         const response = await fetch('https://resale-market-server.vercel.app/categories');
     //         const data = await response.json();
     //         return data;
     //     }
@@ -42,7 +42,7 @@ const AddCategory = () => {
                     console.log("Category :", category);
 
                     // Save Categories information
-                    fetch('http://localhost:5000/categories', {
+                    fetch('https://resale-market-server.vercel.app/categories', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

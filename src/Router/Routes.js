@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/categories'),
+                loader: () => fetch('https://resale-market-server.vercel.app/categories'),
             },
             {
                 path: '/categories',
@@ -49,12 +49,12 @@ const router = createBrowserRouter([
             {
                 path: '/products/:Id',
                 element: <PrivateRoute><Product></Product></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products?category=${params.Id}`),
+                loader: ({ params }) => fetch(`https://resale-market-server.vercel.app/products?category=${params.Id}`),
             },
             {
                 path: '/updateProduct/:id',
                 element: <PrivateRoute> <ProductUpdate></ProductUpdate></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`),
+                loader: ({ params }) => fetch(`https://resale-market-server.vercel.app/products/${params.id}`),
             },
             {
                 path: '/signup',
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/myBookings',
                 element: <PrivateRoute> <MyBookings></MyBookings></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/bookingsOnMail'),
+                loader: () => fetch('https://resale-market-server.vercel.app/bookingsOnMail'),
             },
             // {
             //     path: '/dashboard/productOnMail',
@@ -113,7 +113,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/updateCategory/:id',
                 element: <AdminRoute> <CategoryUpdate></CategoryUpdate></AdminRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`),
+                loader: ({ params }) => fetch(`https://resale-market-server.vercel.app/categories/${params.id}`),
             },
             {
                 path: '/dashboard/addProduct',
@@ -138,12 +138,12 @@ const router = createBrowserRouter([
             // {
             //     path: '/dashboard/payment/:id',
             //     element: <AdminRoute><Payment></Payment></AdminRoute>,
-            //     loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`),
+            //     loader: ({ params }) => fetch(`https://resale-market-server.vercel.app/bookings/${params.id}`),
             // },
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`),
+                loader: ({ params }) => fetch(`https://resale-market-server.vercel.app/bookings/${params.id}`),
             },
         ])
     },

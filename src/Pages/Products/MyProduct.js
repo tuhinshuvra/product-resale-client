@@ -8,7 +8,7 @@ const MyProduct = () => {
     // console.log('Login User Email : ', user.email);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/productOnMail?email=${user?.email}`)
+        fetch(`https://resale-market-server.vercel.app/productOnMail?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setMyProducts(data))
     }, [user?.email])
