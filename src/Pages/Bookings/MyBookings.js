@@ -56,7 +56,7 @@ const MyBookings = () => {
                             <th>Meet Location</th>
                             <th>Date</th>
                             <th>Time</th>
-                            <th>Action</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     {/* buyer date email location    phone  price  product time _id */}
@@ -76,18 +76,19 @@ const MyBookings = () => {
                                     <td>{book.time}</td>
                                     <td>
                                         {
-                                            // book.price && !book.paid &&
-                                            <Link to={`/dashboard/payment/${book._id}`}>
-                                                <button className=' btn btn-primary btn-sm'
-                                                >Pay</button>
-                                            </Link>
+                                            book.price && !book.paid && <>
+                                                <Link to={`/dashboard/payment/${book._id}`}>
+                                                    <button className=' btn btn-primary btn-sm'
+                                                    >Pay</button>
+                                                </Link>
+                                                <label onClick={() => setDeleteBooking(book)} htmlFor="confirmation-modal" className="btn btn-sm btn-error ml-1">Delete</label>
+                                            </>
                                         }
                                         {
                                             book.price && book.paid &&
-                                            <span className=' btn btn-success btn-sm'
+                                            <span className=' font-extrabold text-green-800 '
                                             >Paid</span>
                                         }
-                                        <label onClick={() => setDeleteBooking(book)} htmlFor="confirmation-modal" className="btn btn-sm btn-error ml-1">Delete</label>
                                     </td>
                                     {/* <td>${book.price}</td> */}
                                 </tr>)
