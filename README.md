@@ -7,3 +7,4 @@
  4. It is build on all latest version of all tools
  5. This web site is mady by row ReactJS Code
  6. It is fully responsive web site for any devide.
+ 6. Admin User: razzak@gmail.com Password: 123456@A
